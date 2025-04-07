@@ -14,9 +14,12 @@ class Machine(models.Model):
     model_num = models.CharField(max_length=100, blank=True, null=True)
     serial_num = models.CharField(max_length=100, blank=True, null=True)
 
+    def __str__(self):
+        return f"{self.machine_type.name} ({self.serial_num})"
+
 class MultiReceptionAndTV(models.Model):
     id = models.AutoField(primary_key=True)
-    reception_id = models.ForeignKey('Reception', on_delete=models.CASCADE, related_name='multi_reception_and_tv')
+    reception_id = models.ForeignKey('reception.Reception', on_delete=models.CASCADE, related_name='multi_reception_and_tv')
     machine_id = models.ForeignKey('Machine', on_delete=models.CASCADE, related_name='multi_reception_and_tv')
 
 class Agent(models.Model):

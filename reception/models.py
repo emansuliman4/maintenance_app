@@ -1,5 +1,6 @@
 from django.db import models
-
+from user.models import User 
+from machine.models import Machine
 # Create your models here.
 class CallType(models.TextChoices):
     RECEIVED = 'received', 'Received'
@@ -20,7 +21,7 @@ class Reception(models.Model):
     initial_damage = models.TextField(max_length=500, blank=True, null=True)
     real_damage = models.TextField(max_length=500, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
-    who_received = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='received_receptions')
+    who_received = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='received_receptions')
     received = models.BooleanField(default=False)
     check_feedback = models.TextField(max_length=500, blank=True, null=True)
     calling_customer = models.BooleanField(default=False)
@@ -66,8 +67,8 @@ class MultiReceptionAndCustomer:
     reception_id = models.ForeignKey('Reception', on_delete=models.CASCADE, related_name='multi_reception')
     customer_id = models.ForeignKey('customer.Customer', on_delete=models.CASCADE, related_name='multi_customer')
 
-class ProcessCall:
-    call_id = models.AutoField(primary_key=True)
-    reception_id = models.ForeignKey('Reception', on_delete=models.CASCADE, related_name='process_call')
-    time = models.DateTimeField(auto_now_add=True)
-    replay = models.TextField(max_length=500, blank=True, null=True)
+# class ProcessCall:
+#     call_id = models.AutoField(primary_key=True)
+#     reception_id = models.ForeignKey('Reception', on_delete=models.CASCADE, related_name='process_call')
+#     time = models.DateTimeField(auto_now_add=True)
+#     replay = models.TextField(max_length=500, blank=True, null=True)

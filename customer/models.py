@@ -23,8 +23,3 @@ class CustomerPhone(models.Model):
     def __str__(self):
         return self.phone_number
     
-class Receptionist(models.Model):
-    receptionist_id = models.AutoField(primary_key=True)
-    reception_id = models.ForeignKey('Reception', on_delete=models.CASCADE, related_name='receptionist')
-    receptionist_name = models.CharField(max_length=100)
-
