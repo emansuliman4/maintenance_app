@@ -1,8 +1,8 @@
 from django.db import models
-from django.conf import settings  # Import settings to use AUTH_USER_MODEL
+from django.conf import settings
 
 class ProcessMaintenance(models.Model):
-    process_maintenance_id = models.AutoField(primary_key=True)
+    process_maintenance_id = models.AutoField(primary_key=True)  # Only one auto-generated field
     reception_id = models.ForeignKey(
         'Reception',
         on_delete=models.CASCADE,
@@ -34,7 +34,7 @@ class Reception(models.Model):
     real_damage = models.TextField(max_length=500, blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     who_received = models.ForeignKey(
-        settings.AUTH_USER_MODEL,  # Use Django's built-in User model
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='received_receptions'
     )
